@@ -99,15 +99,19 @@ class MEDAEnv(gym.Env):
 			done = True
 		elif self.dynamic_flag == 1:
 			if self.is_vlong:
-				if action==Actions.R or action==Actions.L or Actions.C1<=action<=Actions.C4:
-					reward = -0.1
-				else:
+				if Actions.UR <= action <= Actions.DL:
+					reward = -0.4
+				elif action == Actions.R or action == Actions.L:
 					reward = -0.2
+				else:
+					reward = -0.1
 			else:
-				if action==Actions.U or action==Actions.D or Actions.C1<=action<=Actions.C4:
-					reward = -0.1
-				else:
+				if Actions.UR <= action <= Actions.DL:
+					reward = -0.4
+				elif action == Actions.U or action == Actions.D:
 					reward = -0.2
+				else:
+					reward = -0.1
 			self.dynamic_flag = 0
 			#message = "derror"
 			info[0] = 1

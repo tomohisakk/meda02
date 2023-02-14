@@ -177,14 +177,13 @@ def test(save_name, w, h, dsize, s_modules, d_modules):
 
 	n_games = 0
 	sum_total_derror = 0
-	sum_total_time = 0
-	unreach_flag = False
+	sum_total_step = 0
 
 	map_symbols = Symbols()
 	mapclass = MakeMap(w,h,dsize,s_modules, d_modules)
 
 	n_critical = 0
-	for n_games in range(100):
+	for n_games in range(1000):
 		tmap = maps[n_games]
 
 		observation = env.reset(test_map=tmap)
@@ -194,7 +193,7 @@ def test(save_name, w, h, dsize, s_modules, d_modules):
 		n_steps = 0
 		n_degrad = 0
 
-		path = _compute_shortest_route(w, h, dsize, map_symbols, tmap, (0,0))
+#		path = _compute_shortest_route(w, h, dsize, map_symbols, tmap, (0,0))
 
 		while not done:
 			observation = T.tensor([observation], dtype=T.float)
@@ -212,18 +211,17 @@ def test(save_name, w, h, dsize, s_modules, d_modules):
 			if done:
 				break
 
-		if len(path)-1 == info[1]:
-			n_critical += 1
+		sum_total_step += info[1]
 
 		if env.max_step == n_steps:
 			print(n_games)
 			return 0
 
-	print("Avg critical path is", n_critical/100)
-	print("Avg d_error is", sum_total_derror/100)
+	print("Avg critical path is", sum_total_step/1000)
+	print("Avg d_error is", sum_total_derror/1000)
 
 	save_file.close()
 
-	return n_critical/100
+	return sum_total_step/1000
 
 

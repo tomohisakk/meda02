@@ -11,12 +11,12 @@ from map import MakeMap
 from map import Symbols
 
 ###### Set params ##########
-TOTAL_GAMES = 100
-W = 5
-H = 8
+TOTAL_GAMES = 1000
+W = 16
+H = 16
 DSIZE = 1
-S_MODULES = 0
-D_MODULES = 4
+S_MODULES = 12
+D_MODULES = 0
 
 ############################
 

@@ -15,15 +15,15 @@ warnings.filterwarnings("ignore")
 class Params():
 ###########################
 
-	games = 10000
+	games = 100000
 #	nepoches = 100
 	lr = .001
 	entropy_beta = .02
 	batch_size = 256
 	ppo_epoches = 10
 
-	w = 8
-	h = 8
+	w = 16
+	h = 16
 	dsize = 1
 	s_modules = 0
 	d_modules = 0
@@ -31,7 +31,7 @@ class Params():
 
 #########################
 
-	useGPU = False
+	useGPU = True
 	env_name = str(w)+str(h)+str(dsize)+str(s_modules)+str(d_modules)
 	gamma = 0.99
 	gae_lambda = 0.95
