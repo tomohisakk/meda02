@@ -147,6 +147,8 @@ class MEDAEnv(gym.Env):
 
 		info[1] = self.total_step
 
+#		print(self.map)
+
 		return obs, reward, done, info
 
 #	def _get_dist(self, state1, state2):

@@ -12,11 +12,11 @@ from map import Symbols
 
 ###### Set params ##########
 TOTAL_GAMES = 100
-W = 8
+W = 5
 H = 8
 DSIZE = 1
 S_MODULES = 0
-D_MODULES = 6
+D_MODULES = 4
 
 ############################
 

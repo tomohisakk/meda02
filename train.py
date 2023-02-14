@@ -26,12 +26,12 @@ class Params():
 	h = 8
 	dsize = 1
 	s_modules = 0
-	d_modules = 3
+	d_modules = 0
 	importf = None
 
 #########################
 
-	useGPU = True
+	useGPU = False
 	env_name = str(w)+str(h)+str(dsize)+str(s_modules)+str(d_modules)
 	gamma = 0.99
 	gae_lambda = 0.95
