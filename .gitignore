@@ -1,0 +1,5 @@
+logs/
+runs/
+saves/
+testmaps/
+__pycache__/
