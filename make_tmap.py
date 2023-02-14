@@ -11,7 +11,7 @@ from map import MakeMap
 from map import Symbols
 
 ###### Set params ##########
-TOTAL_GAMES = 1000
+TOTAL_GAMES = 100
 W = 16
 H = 16
 DSIZE = 1

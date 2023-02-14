@@ -15,10 +15,10 @@ warnings.filterwarnings("ignore")
 class Params():
 ###########################
 
-	games = 100000
+	games = 10000
 #	nepoches = 100
 	lr = .001
-	entropy_beta = .02
+	entropy_beta = .2
 	batch_size = 256
 	ppo_epoches = 10
 
@@ -26,7 +26,7 @@ class Params():
 	h = 16
 	dsize = 1
 	s_modules = 0
-	d_modules = 0
+	d_modules = 12
 	importf = None
 
 #########################

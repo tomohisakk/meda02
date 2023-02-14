@@ -172,7 +172,7 @@ def test(save_name, w, h, dsize, s_modules, d_modules):
 	mapclass = MakeMap(w,h,dsize,s_modules, d_modules)
 
 	n_critical = 0
-	for n_games in range(1000):
+	for n_games in range(100):
 		tmap = maps[n_games]
 
 		observation = env.reset(test_map=tmap)
@@ -206,11 +206,11 @@ def test(save_name, w, h, dsize, s_modules, d_modules):
 			print(n_games)
 			return 0
 
-	print("Avg critical path is", sum_total_step/1000)
-	print("Avg d_error is", sum_total_derror/1000)
+	print("Avg critical path is", sum_total_step/100)
+	print("Avg d_error is", sum_total_derror/100)
 
 	save_file.close()
 
-	return sum_total_step/1000
+	return sum_total_step/100
 
 
