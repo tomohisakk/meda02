@@ -68,17 +68,6 @@ def setup_ignite(engine: Engine, params: SimpleNamespace, exp_source, run_name: 
 				good_results.append(trainer.state.episode/params.games)
 				good_results.append(tmp)
 
-				if tmp == 1.0:
-					print("=== Good Results===")
-					print(good_results)
-					subject = "Learning end from CPU"
-					body = "Successfully end"
-					sender = "tomohisa.kawakami@tomiyama-lab.org"
-					recipients = ["tomohisaee@gmail.com"]
-					password = "22901900284"
-					send_email(subject, body, sender, recipients, password)
-					engine.terminate()
-
 			if len(good_results)!=0 and trainer.state.episode/params.games == good_results[0]:
 				scheduler.step()
 				print("LR: ", optimizer.param_groups[0]['lr'])
