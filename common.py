@@ -65,23 +65,30 @@ def setup_ignite(engine: Engine, params: SimpleNamespace, exp_source, run_name: 
 			net.save_checkpoint(save_name)
 			tmp = test(save_name, params.w, params.h, params.dsize, params.s_modules, params.d_modules)
 			if tmp != 0:
-				good_results.append(trainer.state.episode/params.games)
-				good_results.append(tmp)
-
-			if len(good_results)!=0 and trainer.state.episode/params.games == good_results[0]:
-				scheduler.step()
-				print("LR: ", optimizer.param_groups[0]['lr'])
-
-			if len(good_results)!=0 and trainer.state.episode/params.games == (good_results[0]+3):
-				print("=== Good Results===")
-				print(good_results)
-				subject = "Learning end from CPU"
+				subject = "Learning end from GPU"
 				body = "Successfully end"
 				sender = "tomohisa.kawakami@tomiyama-lab.org"
 				recipients = ["tomohisaee@gmail.com"]
 				password = "22901900284"
 				send_email(subject, body, sender, recipients, password)
 				engine.terminate()
+#				good_results.append(trainer.state.episode/params.games)
+#				good_results.append(tmp)
+
+#			if len(good_results)!=0 and trainer.state.episode/params.games == good_results[0]:
+#				scheduler.step()
+#				print("LR: ", optimizer.param_groups[0]['lr'])
+
+#			if len(good_results)!=0 and trainer.state.episode/params.games == (good_results[0]+3):
+#				print("=== Good Results===")
+#				print(good_results)
+#				subject = "Learning end from GPU"
+#				body = "Successfully end"
+#				sender = "tomohisa.kawakami@tomiyama-lab.org"
+#				recipients = ["tomohisaee@gmail.com"]
+#				password = "22901900284"
+#				send_email(subject, body, sender, recipients, password)
+#				engine.terminate()
 
 	logdir = f"runs/{params.env_name}"
 	tb = tb_logger.TensorboardLogger(log_dir=logdir)

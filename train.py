@@ -17,16 +17,16 @@ class Params():
 
 	games = 10000
 #	nepoches = 100
-	lr = .001
-	entropy_beta = .2
-	batch_size = 256
-	ppo_epoches = 10
+	lr = .0001
+	entropy_beta = .1
+	batch_size = 1024
+	ppo_epoches = 3
 
-	w = 16
-	h = 16
+	w = 24
+	h = 24
 	dsize = 1
 	s_modules = 0
-	d_modules = 12
+	d_modules = 57
 	importf = None
 
 #########################
@@ -35,11 +35,11 @@ class Params():
 	env_name = str(w)+str(h)+str(dsize)+str(s_modules)+str(d_modules)
 	gamma = 0.99
 	gae_lambda = 0.95
-	ppo_eps =  0.2
+	ppo_eps =  0.1
 	stop_test_reward = 10000
 	stop_reward = None
 #	n_actors = 4
-	ppo_trajectory = 2560
+	ppo_trajectory = 4096
 
 params = Params()
 
@@ -68,8 +68,8 @@ if __name__ == "__main__":
 
 	exp_source = ptan.experience.ExperienceSource(env, agent, steps_count=1)
 
-#	optimizer = optim.Adam(net.parameters(), lr=params.lr, eps=0.1)
-	optimizer = optim.SGD(net.parameters(), lr=params.lr, momentum=0.9)
+	optimizer = optim.Adam(net.parameters(), lr=params.lr)
+#	optimizer = optim.SGD(net.parameters(), lr=params.lr, momentum=0.9)
 
 	scheduler = T.optim.lr_scheduler.ExponentialLR(optimizer, gamma=0.1)
 
