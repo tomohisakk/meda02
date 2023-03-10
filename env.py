@@ -3,6 +3,7 @@ import math
 import random
 import numpy as np
 from enum import IntEnum
+from PIL import ImageDraw, Image
 
 from map import MakeMap
 from map import Symbols
@@ -56,6 +57,7 @@ class MEDAEnv(gym.Env):
 		self.is_move = False
 
 		self.total_step = 0
+		self.initial_map = None
 
 
 	def reset(self, test_map=None):
@@ -68,6 +70,8 @@ class MEDAEnv(gym.Env):
 			self.map = self.mapclass.gen_random_map()
 		else:
 			self.map = test_map
+		
+		self.initial_map = self.map.copy()
 
 		obs = self._get_obs()
 		self.is_vlong = False
@@ -350,21 +354,31 @@ class MEDAEnv(gym.Env):
 #		print(obs)
 		return obs
 
-	def render(self):
+	def render(self, cell_size=30, border_width=1, bg_color=(255, 255, 255)):
 		img01 = self._get_obs().astype(np.uint8)
-		img02 = self.map
-		for y in range(self.w):
-			for x in range(self.h):
-				if img01[i][j][0] == 1:
-					img01[y][x] = [0, 0, 255] # blue
-				elif img01[i][j][1] == 1:
-					img01[y][x] = [255, 0, 0] # red
-				elif img01[i][j][1] == 1 and img02[i][j] == self.map_symbols.Static_module:
-					img01[y][x] = [192, 192, 192] #gray
-				else:
-					img01[y][x] = [0, 255, 0]
+		img_size = (self.w*cell_size, self.h*cell_size)
+		img = Image.new('RGB', img_size, color=bg_color)
+		draw = ImageDraw.Draw(img)
 
-		return img
+		for x in range(self.w):
+			for y in range(self.h):
+				cell_left = x*cell_size
+				cell_upper = y*cell_size
+				cell_right = (x+1)*cell_size
+				cell_lower = (y+1)*cell_size
+
+				if img01[x][y][0] == 1:
+					draw.rectangle((cell_left, cell_upper, cell_right, cell_lower), fill=(0, 0, 255), outline=(0, 0, 0), width=border_width)
+				elif img01[x][y][1] == 1:
+					draw.rectangle((cell_left, cell_upper, cell_right, cell_lower), fill=(255, 0, 0), outline=(0, 0, 0), width=border_width)
+				elif img01[x][y][2] == 1 and self.initial_map[y][x] == self.map_symbols.Static_module:
+					draw.rectangle((cell_left, cell_upper, cell_right, cell_lower), fill=(192, 192, 192), outline=(0, 0, 0), width=border_width)
+				elif img01[x][y][2] == 1 and self.initial_map[y][x] == self.map_symbols.Dynamic_module:
+					draw.rectangle((cell_left, cell_upper, cell_right, cell_lower), fill=(0, 255, 0), outline=(0, 0, 0), width=border_width)
+				else:
+					draw.rectangle((cell_left, cell_upper, cell_right, cell_lower), fill=bg_color, outline=(0, 0, 0), width=border_width)
+
+		return np.array(img)
 
 	def close(self):
 		pass

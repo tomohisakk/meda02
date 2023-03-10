@@ -52,12 +52,12 @@ if __name__ == "__main__":
 	T.manual_seed(42)
 	###### Set params ##########
 
-	W = 8
+	W = 5
 	H = 8
 	DSIZE = 1
-	S_MODULES = 0
-	D_MODULES = 0
-	N_EPOCH = 5
+	S_MODULES = 2
+	D_MODULES = 2
+	N_EPOCH = 63
 
 	############################
 	ENV_NAME = str(W)+str(H)+str(DSIZE)+str(S_MODULES)+str(D_MODULES)+ "/" + str(N_EPOCH)
