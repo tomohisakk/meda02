@@ -3,7 +3,7 @@ import torch as T
 import numpy as np
 import collections
 
-import common, ppo
+import common_test, ppo
 from env import MEDAEnv
 from map import MakeMap
 from map import Symbols
@@ -62,6 +62,6 @@ if __name__ == "__main__":
 	############################
 	ENV_NAME = str(W)+str(H)+str(DSIZE)+str(S_MODULES)+str(D_MODULES)+ "/" + str(N_EPOCH)
 
-	test_result = common.test(ENV_NAME, W, H, DSIZE, S_MODULES, D_MODULES)
+	test_result = common_test.test(ENV_NAME, W, H, DSIZE, S_MODULES, D_MODULES)
 
 	print(test_result)

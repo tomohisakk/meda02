@@ -350,5 +350,21 @@ class MEDAEnv(gym.Env):
 #		print(obs)
 		return obs
 
+	def render(self):
+		img01 = self._get_obs().astype(np.uint8)
+		img02 = self.map
+		for y in range(self.w):
+			for x in range(self.h):
+				if img01[i][j][0] == 1:
+					img01[y][x] = [0, 0, 255] # blue
+				elif img01[i][j][1] == 1:
+					img01[y][x] = [255, 0, 0] # red
+				elif img01[i][j][1] == 1 and img02[i][j] == self.map_symbols.Static_module:
+					img01[y][x] = [192, 192, 192] #gray
+				else:
+					img01[y][x] = [0, 255, 0]
+
+		return img
+
 	def close(self):
 		pass
